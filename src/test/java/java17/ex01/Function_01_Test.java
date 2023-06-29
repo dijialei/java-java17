@@ -22,7 +22,22 @@ public class Function_01_Test {
     // TODO le nom sera de la forme "last_<ENTIER>"
     // TODO l'age sera de la forme "<ENTIER>"
     // TODO le mot de passe sera de la forme "pass_<ENTIER>"
-    private Function<Integer, Person> intToPerson = null;
+    private Function<Integer, Person> intToPerson = entier -> {
+        Person person = new Person();
+        person.setAge(entier);
+        person.setFirstname("first_"+entier);
+        person.setLastname("last_"+entier);
+        person.setPassword("pass_"+entier);
+        return person;
+    };
+
+    public Function<Integer, Person> getIntToPerson() {
+        return intToPerson;
+    }
+
+    public void setIntToPerson(Function<Integer, Person> intToPerson) {
+        this.intToPerson = intToPerson;
+    }
     // end::intToPerson[]
 
     @Test
@@ -31,6 +46,7 @@ public class Function_01_Test {
         // TODO invoquer la fonction intToPerson avec en paramètre l'entier 10.
         Person result = null;
 
+        result = getIntToPerson().apply(10);
         assert result.getFirstname().equals("first_10");
         assert result.getLastname().equals("last_10");
         assert result.getAge().equals(10);
@@ -43,7 +59,20 @@ public class Function_01_Test {
     // TODO Compléter la définition de cette fonction
     // TODO la propriété owner est valorisé avec la personne en paramètre
     // TODO la propriété balance est valorisé à 1000
-    private Function<Person, Account> personToAccount = null;
+    private Function<Person, Account> personToAccount = person -> {
+        Account account = new Account();
+        account.setOwner(person);
+        account.setBalance(1000);
+        return account;
+    };
+
+    public Function<Person, Account> getPersonToAccount() {
+        return personToAccount;
+    }
+
+    public void setPersonToAccount(Function<Person, Account> personToAccount) {
+        this.personToAccount = personToAccount;
+    }
     // end::personToAccount[]
 
     @Test
@@ -54,6 +83,7 @@ public class Function_01_Test {
         // TODO invoquer la fonction personToAccount
         Account result = null;
 
+        result = getPersonToAccount().apply(person);
         assert result.getOwner().equals(person);
         assert result.getBalance().equals(1000);
     }
